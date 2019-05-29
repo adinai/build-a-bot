@@ -44,7 +44,7 @@ function getPreviousValidIndex(index, length){
 }
 function getNextValidIndex(index, length){
  const incrementedIndex = index +1;
- return incrementedIndex > legth -1 ? 0 : incrementedIndex;
+ return incrementedIndex > length -1 ? 0 : incrementedIndex;
 }
 
 
@@ -61,10 +61,10 @@ export default {
     },
     methods: {
       selectNextHead(){
-        this.selectedHeadIndex +=1;
+        this.selectedHeadIndex = getNextValidIndex(this.selectedHeadIndex, availableParts.heads.length);
       },
       selectPrevHead(){
-       this.selectedHeadIndex -=1;
+       this.selectedHeadIndex = getPreviousValidIndex(this.selectedHeadIndex, availableParts.heads.length);
       },
       selectNextPart(){
        this.selectedPartIndex +=1;
