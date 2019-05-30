@@ -87,7 +87,13 @@ export default {
       },
       selectNextRightHand(){
         this.selectedRightHandIndex = getNextValidIndex(this.selectedRightHandIndex, availableParts.arms.length)
-      }
+      },
+      selectPrevBase(){
+        this.selectedBaseIndex = getPreviousValidIndex(this.selectedBaseIndex, availableParts.bases.length)
+      },
+      selectNextBase(){
+        this.selectedBaseIndex = getNextValidIndex(this.selectedBaseIndex, availableParts.bases.length)
+      },
     }
 }
 </script>
