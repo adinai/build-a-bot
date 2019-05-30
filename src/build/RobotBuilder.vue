@@ -2,33 +2,33 @@
 <div>
     <div class="top-row">
         <div class="top part">
-            <img v-bind:src="availableParts.heads[selectedHeadIndex].src" title="head"/>
-            <button v-on:click="selectPrevHead()" class="prev-selector">&#9668;</button>
-            <button v-on:click="selectNextHead()" class="next-selector">&#9658;</button>
+            <img :src="availableParts.heads[selectedHeadIndex].src" title="head"/>
+            <button @click="selectPrevHead()" class="prev-selector">&#9668;</button>
+            <button @click="selectNextHead()" class="next-selector">&#9658;</button>
         </div>
     </div>
     <div class="middle-row">
         <div class="left part">
-            <img v-bind:src="availableParts.arms[selectedPartIndex].src" title="left arm"/>
-            <button v-on:click="selectPrevPart()" class="prev-selector">&#9650;</button>
-            <button v-on:click="selectNextPart()" class="next-selector">&#9660;</button>
+            <img :src="availableParts.arms[selectedPartIndex].src" title="left arm"/>
+            <button @click="selectPrevPart()" class="prev-selector">&#9650;</button>
+            <button @click="selectNextPart()" class="next-selector">&#9660;</button>
         </div>
         <div class="center-part">
-            <img v-bind:src="availableParts.torsos[0].src" title="left arm"/>
-            <button class="prev-selector">&#9668;</button>
-            <button class="next-selector">&#9658;</button>
+            <img :src="availableParts.torsos[selectedTorsoIndex].src" title="left arm"/>
+            <button @click="selectPrevTorso()" class="prev-selector">&#9668;</button>
+            <button @click="selectNextTorso()" class="next-selector">&#9658;</button>
         </div>
         <div class="right part">
-            <img v-bind:src="availableParts.arms[0].src" title="left arm"/>
-            <button class="prev-selector">&#9650;</button>
-            <button class="next-selector">&#9660;</button>
+            <img :src="availableParts.arms[selectedRightHandIndex].src" title="left arm"/>
+            <button @click="selectPrevRightHand()" class="prev-selector">&#9650;</button>
+            <button @click="selectNextRightHand()" class="next-selector">&#9660;</button>
         </div>
     </div>
     <div class="bottom-row">
         <div class="bottom part">
-            <img v-bind:src="availableParts.bases[0].src" title="left arm"/>
-            <button class="prev-selector">&#9668;</button>
-            <button class="next-selector">&#9558;</button>
+            <img :src="availableParts.bases[selectedBaseIndex].src" title="left arm"/>
+            <button @click="selectPrevBase()" class="prev-selector">&#9668;</button>
+            <button @click="selectNextBase()" class="next-selector">&#9558;</button>
         </div>
     </div>
 </div>
@@ -57,6 +57,10 @@ export default {
        availableParts,
        selectedHeadIndex: 0,
        selectedPartIndex: 0,
+       selectedTorsoIndex: 0,
+       selectedRightHandIndex: 0,
+       selectedBaseIndex: 0,
+      
        };
     },
     methods: {
@@ -64,13 +68,25 @@ export default {
         this.selectedHeadIndex = getNextValidIndex(this.selectedHeadIndex, availableParts.heads.length);
       },
       selectPrevHead(){
-       this.selectedHeadIndex = getPreviousValidIndex(this.selectedHeadIndex, availableParts.heads.length);
+        this.selectedHeadIndex = getPreviousValidIndex(this.selectedHeadIndex, availableParts.heads.length);
       },
       selectNextPart(){
-       this.selectedPartIndex +=1;
+        this.selectedPartIndex = getNextValidIndex(this.selectedPartIndex, availableParts.arms.length);
       },
       selectPrevPart(){
-       this.selectedPartIndex -=1;
+        this.selectedPartIndex = getPreviousValidIndex(this.selectedPartIndex, availableParts.arms.length);
+      },
+      selectPrevTorso(){
+        this.selectedTorsoIndex = getPreviousValidIndex(this.selectedTorsoIndex, availableParts.torsos.length)
+      },
+      selectNextTorso(){
+        this.selectedTorsoIndex = getNextValidIndex(this.selectedTorsoIndex, availableParts.torsos.length)
+      },
+      selectPrevRightHand(){
+        this.selectedRightHandIndex = getPreviousValidIndex(this.selectedRightHandIndex, availableParts.arms.length)
+      },
+      selectNextRightHand(){
+        this.selectedRightHandIndex = getNextValidIndex(this.selectedRightHandIndex, availableParts.arms.length)
       }
     }
 }
